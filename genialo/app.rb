@@ -1,5 +1,6 @@
 # require 'httparty'
 require 'json'
+require 'lib/client'
 
 def lambda_handler(event:, context:)
   # Sample pure Lambda function
@@ -27,11 +28,14 @@ def lambda_handler(event:, context:)
   #   puts error.inspect
   #   raise error
   # end
+  event = JSON.generate(event)
+  # puts event
+  response = Client.chat(event["prompt"])
 
   {
     statusCode: 200,
     body: {
-      message: "Hello World!",
+      message: response,
       # location: response.body
     }.to_json
   }

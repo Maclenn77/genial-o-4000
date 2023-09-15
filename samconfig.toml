@@ -4,7 +4,7 @@ version = 0.1
 
 [default]
 [default.global.parameters]
-stack_name = "genialo-4000git "
+stack_name = "genialo-4000"
 
 [default.build.parameters]
 cached = true

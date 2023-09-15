@@ -8,8 +8,8 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
-    MemorySize: 128
+    Timeout: 300
+    MemorySize: 256
 
 Resources:
   GenialoFunction:
@@ -20,12 +20,15 @@ Resources:
       Runtime: ruby3.2
       Architectures:
         - x86_64
+      Environment:
+                Variables:
+                    OPENAI_API_TOKEN: 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
       Events:
         Genialo:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /chat
-            Method: put
+            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -33,7 +36,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   GenialoApi:
     Description: "API Gateway endpoint URL for Prod stage for Genialo function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/genialo/"
   GenialoFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt GenialoFunction.Arn
