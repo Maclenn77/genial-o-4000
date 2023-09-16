@@ -15,11 +15,15 @@ lint = true
 
 [default.deploy.parameters]
 capabilities = "CAPABILITY_IAM"
-confirm_changeset = true
-resolve_s3 = true
+confirm_changeset = false
+s3_prefix = "genialo-4000"
+resolve_s3 = false
+region = "us-east-2"
+disable_rollback = false
+image_repositories = []
 
 [default.package.parameters]
-resolve_s3 = true
+resolve_s3 = false
 
 [default.sync.parameters]
 watch = true
