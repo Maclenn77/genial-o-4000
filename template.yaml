@@ -10,19 +10,20 @@ Globals:
   Function:
     Timeout: 300
     MemorySize: 256
+    Runtime: ruby3.2
 
 Resources:
   GenialoFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: genialo/
       Handler: app.lambda_handler
-      Runtime: ruby3.2
+      CodeUri: genialo/
       Architectures:
         - x86_64
       Environment:
-                Variables:
-                    OPENAI_API_TOKEN: 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
+        Variables:
+          OPENAI_API_TOKEN: <your-openai-api-token>
+          TELEGRAM_API_TOKEN: <your-telegram-api-token>
       Events:
         Genialo:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
