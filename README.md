@@ -1,62 +1,78 @@
-# G.E.N.I.A.L - O 4000
+# G.E.N.I.A.L - O 4000 Telegram Bot Lambda Function
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+Esta LambdaFunction utiliza el entorno de ejecución Ruby 3.2 para alojar y ejecutar el bot de Telegram G.E.N.I.A.L - O 4000.
 
-- hello_world - Code for the application's Lambda function.
-- events - Invocation events that you can use to invoke the function.
-- tests - Unit tests for the application code.
-- template.yaml - A template that defines the application's AWS resources.
+## Estructura del Repositorio
 
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
+- **/genial-o-4000**: Este es el directorio principal del repositorio.
+- **lambda_function.rb**: Contiene el código de la LambdaFunction en Ruby.
+- **Gemfile**: Especifica las gemas de Ruby necesarias para la función.
+- **Gemfile.lock**: Bloquea las versiones de las gemas para garantizar la consistencia.
+- **README.md**: Este archivo que estás leyendo ahora.
 
-If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.
-The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
+## Configuración del Bot en Telegram
 
-* [CLion](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [GoLand](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [WebStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [Rider](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PhpStorm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [RubyMine](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
-* [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
-* [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+1. **Crear un bot en Telegram**:
+   - Habla con el BotFather en Telegram para obtener un token para tu bot.
 
-## Deploy the sample application
+2. **Configurar el entorno de ejecución de Lambda**:
+   - Asegúrate de configurar correctamente el entorno de ejecución en la consola de AWS Lambda para utilizar Ruby 3.2.
 
-The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
+3. **Configurar variables de entorno**:
+   - Añade una variable de entorno llamada `TELEGRAM_BOT_TOKEN` en la configuración de la Lambda, con el token proporcionado por BotFather.
 
-To use the SAM CLI, you need the following tools.
+## Cómo Implementar la LambdaFunction
+
+1. **Crear la función Lambda**:
+   - Crea una función Lambda en la consola de AWS y selecciona Ruby 3.2 como entorno de ejecución.
+
+2. **Subir el código fuente**:
+   - Sube el código del archivo `lambda_function.rb` y asegúrate de incluir los archivos `Gemfile` y `Gemfile.lock`.
+
+3. **Configurar los permisos**:
+   - Asegúrate de que la función Lambda tenga los permisos necesarios para acceder a otros servicios de AWS si es requerido.
+
+## Ejecutar el Bot
+
+Una vez que la LambdaFunction esté configurada y lista, cada vez que se invoque, ejecutará el bot de Telegram G.E.N.I.A.L - O 4000 utilizando el token proporcionado. ¡Disfruta tu bot!
+
+## Deploy
+
+Esta función utilia el _Serverless Application Model Command Line Interface_ (SAM CLI), una extension del AWS CLI que añade funcionalidades al desarrollary probar aplicaciones Lambda. Utiliza Docker para correr las funciones en un ambiente Amazon Linux compatible con Lambda, puede también emular el ambiente de tu aplicación y API.
+
+Para usar SAM CLI, requieres:
 
 * SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 * Ruby - [Install Ruby 3.2](https://www.ruby-lang.org/en/documentation/installation/)
 * Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
 
-To build and deploy your application for the first time, run the following in your shell:
+Para crear y hacer deploy de tu aplicación por primera vez:
 
 ```bash
 sam build
 sam deploy --guided
 ```
+El primer comando construirá a partir del código de tu aplicación, el segund comando empaquetará y deployeará la aplicación a AWS, pidiéndote los siguientes datos.
 
-The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
 
-* **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
-* **AWS Region**: The AWS region you want to deploy your app to.
-* **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.
-* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
-* **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
+* **Stack Name**: El nombre del stack para desplegar en CloudFormation. Debe ser único para tu cuenta y región. Un buen punto de partida sería algo que coincida con el nombre de tu proyecto.
 
-You can find your API Gateway Endpoint URL in the output values displayed after deployment.
+* **Región de AWS (AWS Region)**: La región de AWS en la que deseas desplegar tu aplicación.
 
-## Use the SAM CLI to build and test locally
+* **Confirmar cambios antes del despliegue (Confirm changes before deploy)**: Si se establece en sí (yes), cualquier conjunto de cambios se mostrará antes de la ejecución para su revisión manual. Si se establece en no (no), el AWS SAM CLI desplegará automáticamente los cambios en la aplicación.
 
-Build your application with the `sam build` command.
+* **Permitir la creación de roles IAM por SAM CLI (Allow SAM CLI IAM role creation)**: Muchas plantillas de AWS SAM, incluyendo este ejemplo, crean roles IAM de AWS necesarios para que la(s) función(es) de AWS Lambda incluidas accedan a los servicios de AWS. Por defecto, estos roles tienen permisos mínimos requeridos. Para desplegar una pila de AWS CloudFormation que cree o modifique roles IAM, se debe proporcionar el valor `CAPABILITY_IAM` para `capabilities`. Si no se otorga permiso a través de esta indicación, para desplegar este ejemplo, debes pasar explícitamente `--capabilities CAPABILITY_IAM` al comando `sam deploy`.
+
+* **Guardar argumentos en samconfig.toml (Save arguments to samconfig.toml)**: Si se establece en sí (yes), tus elecciones se guardarán en un archivo de configuración dentro del proyecto, para que en el futuro solo tengas que volver a ejecutar `sam deploy` sin parámetros para desplegar cambios en tu aplicación.
+
+Puedes encontrar la URL del punto de conexión de la API Gateway en los valores de salida mostrados después del despliegue.
+
+## Usa el SAM CLI para construir y probar localmente
+
+Construye tu aplicación con el comando `sam build`.
 
 ```bash
-ruby-serverless-openai$ sam build
+genial-o-4000$ sam build
 ```
 
 The SAM CLI installs dependencies defined in `hello_world/Gemfile`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
@@ -66,7 +82,7 @@ Test a single function by invoking it directly with a test event. An event is a 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-ruby-serverless-openai$ sam local invoke HelloWorldFunction --event events/event.json
+genial-o-4000$ sam local invoke HelloWorldFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
