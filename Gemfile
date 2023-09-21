@@ -4,13 +4,13 @@ gem "httparty"
 
 gem "aws-sdk-lambda"
 gem "dotenv"
+gem "rubocop"
 gem "ruby-openai"
 gem "tiktoken_ruby"
-gem "rubocop"
 
 
 
 group :test do
-  gem "test-unit"
   gem "mocha"
+  gem "test-unit"
 end
